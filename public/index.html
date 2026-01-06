@@ -700,20 +700,24 @@
     <script src="js/search-client.js"></script>
     <script src="js/darknet-ui.js"></script>
     
-    <!-- Fallback: Force show app after 4 seconds if JS fails -->
+    <!-- Fallback: Force show app after 2 seconds if JS fails -->
     <script>
         setTimeout(function() {
             var boot = document.getElementById('bootScreen');
             var app = document.getElementById('mainApp');
-            if (boot && boot.style.display !== 'none') {
-                console.log('Fallback: forcing app display');
+            // Always ensure boot screen is not blocking
+            if (boot) {
                 boot.style.display = 'none';
-                if (app) {
-                    app.classList.remove('hidden');
-                    app.style.display = 'grid';
-                }
+                boot.style.pointerEvents = 'none';
+                boot.style.opacity = '0';
+                boot.style.visibility = 'hidden';
             }
-        }, 4000);
+            if (app) {
+                app.classList.remove('hidden');
+                app.style.display = 'grid';
+            }
+            console.log('Fallback executed: app should be visible');
+        }, 2000);
     </script>
 </body>
 </html>

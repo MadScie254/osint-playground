@@ -413,18 +413,24 @@ class DarknetUI {
     
     completeBoot(bootScreen, app) {
         console.log('[DarknetUI] Completing boot...');
+        
+        // Force hide boot screen immediately
         if (bootScreen) {
             bootScreen.style.opacity = '0';
-            bootScreen.style.transition = 'opacity 0.4s ease';
+            bootScreen.style.pointerEvents = 'none';
+            bootScreen.classList.add('hidden');
         }
         
+        // Show app immediately
+        if (app) {
+            app.classList.remove('hidden');
+            app.style.display = 'grid';
+        }
+        
+        // Then finish cleanup after transition
         setTimeout(() => {
             if (bootScreen) {
                 bootScreen.style.display = 'none';
-            }
-            if (app) {
-                app.classList.remove('hidden');
-                app.style.display = 'grid';
             }
             this.initializeComponents();
             console.log('[DarknetUI] Boot complete!');
@@ -432,8 +438,16 @@ class DarknetUI {
     }
     
     initializeComponents() {
-        // Initialize OSINT Core
-        this.osint = new OSINTCore();
+        try {
+            // Initialize OSINT Core
+            if (typeof OSINTCore !== 'undefined') {
+                this.osint = new OSINTCore();
+            } else {
+                console.warn('[DarknetUI] OSINTCore not loaded');
+            }
+        } catch (e) {
+            console.error('[DarknetUI] Failed to init OSINTCore:', e);
+        }
         
         // Initialize graph (will be created when view is shown)
         // Initialize map (will be created when view is shown)
