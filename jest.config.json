@@ -1,0 +1,12 @@
+{
+  "testEnvironment": "jsdom",
+  "roots": ["<rootDir>/tests"],
+  "testMatch": ["**/*.test.js"],
+  "collectCoverageFrom": [
+    "public/js/**/*.js",
+    "lib/**/*.js",
+    "!**/node_modules/**"
+  ],
+  "coverageDirectory": "coverage",
+  "verbose": true
+}

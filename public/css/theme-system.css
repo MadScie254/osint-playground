@@ -1,0 +1,536 @@
+/* ==========================================
+   OSINT PLAYGROUND - THEME SYSTEM
+   Comprehensive CSS Variables with Dark/Light Mode
+   Follows WCAG 2.1 AA Accessibility Standards
+   ========================================== */
+
+/* ==========================================
+   🎨 ROOT CSS VARIABLES - DARK THEME (DEFAULT)
+   ========================================== */
+:root {
+    /* Color Mode Indicator */
+    --color-scheme: dark;
+    
+    /* === SEMANTIC COLOR TOKENS === */
+    /* Primary Brand Colors */
+    --color-primary: #00fff5;
+    --color-primary-hover: #33ffff;
+    --color-primary-active: #00cccc;
+    --color-primary-muted: rgba(0, 255, 245, 0.15);
+    --color-primary-subtle: rgba(0, 255, 245, 0.08);
+    
+    /* Secondary/Accent Colors */
+    --color-secondary: #bf00ff;
+    --color-secondary-hover: #d633ff;
+    --color-secondary-muted: rgba(191, 0, 255, 0.15);
+    
+    /* Semantic Colors */
+    --color-success: #39ff14;
+    --color-success-bg: rgba(57, 255, 20, 0.12);
+    --color-success-border: rgba(57, 255, 20, 0.3);
+    
+    --color-warning: #ff9500;
+    --color-warning-bg: rgba(255, 149, 0, 0.12);
+    --color-warning-border: rgba(255, 149, 0, 0.3);
+    
+    --color-error: #ff3b30;
+    --color-error-bg: rgba(255, 59, 48, 0.12);
+    --color-error-border: rgba(255, 59, 48, 0.3);
+    
+    --color-info: #00a8ff;
+    --color-info-bg: rgba(0, 168, 255, 0.12);
+    --color-info-border: rgba(0, 168, 255, 0.3);
+    
+    /* === BACKGROUND HIERARCHY === */
+    --bg-base: #050508;
+    --bg-surface: #0a0a0f;
+    --bg-elevated: #12121a;
+    --bg-overlay: #1a1a25;
+    --bg-highlight: #252535;
+    --bg-interactive: #2a2a3a;
+    --bg-interactive-hover: #353548;
+    
+    /* Glass Morphism */
+    --bg-glass: rgba(18, 18, 26, 0.85);
+    --bg-glass-heavy: rgba(10, 10, 15, 0.95);
+    --bg-glass-light: rgba(255, 255, 255, 0.03);
+    
+    /* === TEXT HIERARCHY === */
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+    --text-muted: #52525b;
+    --text-disabled: #3f3f46;
+    --text-inverse: #09090b;
+    --text-link: var(--color-primary);
+    --text-link-hover: var(--color-primary-hover);
+    
+    /* === BORDER SYSTEM === */
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(255, 255, 255, 0.15);
+    --border-interactive: rgba(255, 255, 255, 0.20);
+    --border-focus: var(--color-primary);
+    
+    /* === ICON COLORS === */
+    --icon-primary: var(--text-primary);
+    --icon-secondary: var(--text-secondary);
+    --icon-tertiary: var(--text-tertiary);
+    --icon-muted: var(--text-muted);
+    --icon-interactive: var(--color-primary);
+    --icon-success: var(--color-success);
+    --icon-warning: var(--color-warning);
+    --icon-error: var(--color-error);
+    
+    /* === SHADOW SYSTEM === */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.7);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.8);
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 20px rgba(0, 255, 245, 0.4), 0 0 40px rgba(0, 255, 245, 0.2);
+    --glow-secondary: 0 0 20px rgba(191, 0, 255, 0.4), 0 0 40px rgba(191, 0, 255, 0.2);
+    --glow-success: 0 0 20px rgba(57, 255, 20, 0.4), 0 0 40px rgba(57, 255, 20, 0.2);
+    --glow-error: 0 0 20px rgba(255, 59, 48, 0.4), 0 0 40px rgba(255, 59, 48, 0.2);
+    
+    /* === FOCUS RING === */
+    --focus-ring: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-primary);
+    --focus-ring-error: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-error);
+    
+    /* === GRADIENTS === */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, var(--bg-base) 100%);
+    --gradient-shine: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+    
+    /* === CHART & VISUALIZATION COLORS === */
+    --chart-1: #00fff5;
+    --chart-2: #bf00ff;
+    --chart-3: #39ff14;
+    --chart-4: #ff9500;
+    --chart-5: #00a8ff;
+    --chart-6: #ff3b30;
+    --chart-7: #ff00ff;
+    --chart-8: #ffd700;
+    --chart-grid: rgba(255, 255, 255, 0.08);
+    --chart-axis: rgba(255, 255, 255, 0.15);
+    
+    /* === MAP COLORS === */
+    --map-water: #0a0a15;
+    --map-land: #12121a;
+    --map-border: #252535;
+    --map-marker-default: var(--color-primary);
+    --map-cluster: var(--color-secondary);
+    --map-heat-low: rgba(0, 168, 255, 0.3);
+    --map-heat-high: rgba(255, 59, 48, 0.8);
+    
+    /* === CONFIDENCE SCORE COLORS === */
+    --confidence-high: #39ff14;
+    --confidence-medium: #ff9500;
+    --confidence-low: #ff3b30;
+    --confidence-unknown: #71717a;
+    
+    /* === PLATFORM BRAND COLORS (Always consistent) === */
+    --platform-github: #ffffff;
+    --platform-twitter: #1da1f2;
+    --platform-linkedin: #0077b5;
+    --platform-reddit: #ff4500;
+    --platform-instagram: #e4405f;
+    --platform-facebook: #1877f2;
+    --platform-tiktok: #000000;
+    --platform-youtube: #ff0000;
+    --platform-discord: #5865f2;
+    --platform-telegram: #0088cc;
+    --platform-hackernews: #ff6600;
+    
+    /* === SPACING (8px base grid) === */
+    --space-0: 0;
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+    --space-16: 4rem;     /* 64px */
+    
+    /* === TYPOGRAPHY === */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    --font-display: 'Orbitron', var(--font-sans);
+    
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    
+    /* === RADIUS === */
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+    
+    /* === TRANSITIONS === */
+    --duration-instant: 50ms;
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 400ms;
+    --duration-slower: 600ms;
+    
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* === Z-INDEX LAYERS === */
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-popover: 500;
+    --z-tooltip: 600;
+    --z-toast: 700;
+    
+    /* === LAYOUT === */
+    --sidebar-width: 72px;
+    --sidebar-expanded: 240px;
+    --header-height: 64px;
+    --panel-width: 400px;
+    --max-content-width: 1400px;
+    
+    /* === FILTER FOR PNG ICONS (Dark mode) === */
+    --icon-filter: none;
+    --icon-filter-inverse: invert(1) brightness(2);
+}
+
+/* ==========================================
+   ☀️ LIGHT THEME
+   ========================================== */
+:root.light-mode,
+[data-theme="light"] {
+    --color-scheme: light;
+    
+    /* Primary Colors - Adjusted for light mode contrast */
+    --color-primary: #0891b2;
+    --color-primary-hover: #0e7490;
+    --color-primary-active: #155e75;
+    --color-primary-muted: rgba(8, 145, 178, 0.12);
+    --color-primary-subtle: rgba(8, 145, 178, 0.06);
+    
+    --color-secondary: #7c3aed;
+    --color-secondary-hover: #6d28d9;
+    --color-secondary-muted: rgba(124, 58, 237, 0.12);
+    
+    /* Semantic Colors */
+    --color-success: #16a34a;
+    --color-success-bg: rgba(22, 163, 74, 0.1);
+    --color-success-border: rgba(22, 163, 74, 0.25);
+    
+    --color-warning: #d97706;
+    --color-warning-bg: rgba(217, 119, 6, 0.1);
+    --color-warning-border: rgba(217, 119, 6, 0.25);
+    
+    --color-error: #dc2626;
+    --color-error-bg: rgba(220, 38, 38, 0.1);
+    --color-error-border: rgba(220, 38, 38, 0.25);
+    
+    --color-info: #0284c7;
+    --color-info-bg: rgba(2, 132, 199, 0.1);
+    --color-info-border: rgba(2, 132, 199, 0.25);
+    
+    /* Backgrounds */
+    --bg-base: #ffffff;
+    --bg-surface: #fafafa;
+    --bg-elevated: #f4f4f5;
+    --bg-overlay: #e4e4e7;
+    --bg-highlight: #d4d4d8;
+    --bg-interactive: #e4e4e7;
+    --bg-interactive-hover: #d4d4d8;
+    
+    /* Glass Morphism */
+    --bg-glass: rgba(255, 255, 255, 0.85);
+    --bg-glass-heavy: rgba(255, 255, 255, 0.95);
+    --bg-glass-light: rgba(0, 0, 0, 0.02);
+    
+    /* Text */
+    --text-primary: #18181b;
+    --text-secondary: #3f3f46;
+    --text-tertiary: #52525b;
+    --text-muted: #71717a;
+    --text-disabled: #a1a1aa;
+    --text-inverse: #fafafa;
+    --text-link: var(--color-primary);
+    --text-link-hover: var(--color-primary-hover);
+    
+    /* Borders */
+    --border-subtle: rgba(0, 0, 0, 0.05);
+    --border-default: rgba(0, 0, 0, 0.10);
+    --border-strong: rgba(0, 0, 0, 0.15);
+    --border-interactive: rgba(0, 0, 0, 0.20);
+    --border-focus: var(--color-primary);
+    
+    /* Icons */
+    --icon-primary: var(--text-primary);
+    --icon-secondary: var(--text-secondary);
+    --icon-tertiary: var(--text-tertiary);
+    --icon-muted: var(--text-muted);
+    
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.15);
+    
+    /* Glows - Muted for light mode */
+    --glow-primary: 0 0 15px rgba(8, 145, 178, 0.25);
+    --glow-secondary: 0 0 15px rgba(124, 58, 237, 0.25);
+    --glow-success: 0 0 15px rgba(22, 163, 74, 0.25);
+    --glow-error: 0 0 15px rgba(220, 38, 38, 0.25);
+    
+    /* Focus Ring */
+    --focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--color-primary);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--bg-base) 0%, var(--bg-surface) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.8) 100%);
+    
+    /* Charts */
+    --chart-1: #0891b2;
+    --chart-2: #7c3aed;
+    --chart-3: #16a34a;
+    --chart-4: #d97706;
+    --chart-5: #0284c7;
+    --chart-6: #dc2626;
+    --chart-7: #c026d3;
+    --chart-8: #ca8a04;
+    --chart-grid: rgba(0, 0, 0, 0.08);
+    --chart-axis: rgba(0, 0, 0, 0.2);
+    
+    /* Maps */
+    --map-water: #e0f2fe;
+    --map-land: #f0fdf4;
+    --map-border: #d1d5db;
+    
+    /* Confidence */
+    --confidence-high: #16a34a;
+    --confidence-medium: #d97706;
+    --confidence-low: #dc2626;
+    --confidence-unknown: #71717a;
+    
+    /* PNG Icon Filter for Light Mode */
+    --icon-filter: invert(0);
+    --icon-filter-inverse: none;
+}
+
+/* ==========================================
+   🖥️ SYSTEM PREFERENCE DETECTION
+   ========================================== */
+@media (prefers-color-scheme: light) {
+    :root:not(.dark-mode):not(.light-mode):not([data-theme]) {
+        /* Apply light theme variables when system prefers light */
+        --color-scheme: light;
+        --color-primary: #0891b2;
+        --bg-base: #ffffff;
+        --bg-surface: #fafafa;
+        --bg-elevated: #f4f4f5;
+        --text-primary: #18181b;
+        --text-secondary: #3f3f46;
+        --border-default: rgba(0, 0, 0, 0.10);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --icon-filter: invert(0);
+    }
+}
+
+/* ==========================================
+   🎯 UTILITY CLASSES
+   ========================================== */
+
+/* Theme-aware icon coloring */
+.icon-adaptive {
+    color: var(--icon-primary);
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+.icon-adaptive-secondary {
+    color: var(--icon-secondary);
+    fill: currentColor;
+}
+
+.icon-adaptive-muted {
+    color: var(--icon-muted);
+    fill: currentColor;
+}
+
+/* For PNG/raster icons that need filtering */
+.icon-png-adaptive {
+    filter: var(--icon-filter);
+    transition: filter var(--duration-fast) var(--ease-default);
+}
+
+.icon-png-inverse {
+    filter: var(--icon-filter-inverse);
+}
+
+/* SVG icons should use currentColor */
+svg.icon {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 1em;
+    height: 1em;
+}
+
+svg.icon-stroke-only {
+    fill: none;
+    stroke: currentColor;
+}
+
+svg.icon-fill-only {
+    fill: currentColor;
+    stroke: none;
+}
+
+/* Theme transition for smooth switching */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+    transition: 
+        background-color var(--duration-normal) var(--ease-default),
+        border-color var(--duration-normal) var(--ease-default),
+        color var(--duration-normal) var(--ease-default),
+        fill var(--duration-normal) var(--ease-default),
+        stroke var(--duration-normal) var(--ease-default),
+        box-shadow var(--duration-normal) var(--ease-default) !important;
+}
+
+/* ==========================================
+   📊 D3/CHART THEME INTEGRATION
+   ========================================== */
+.chart-container {
+    --d3-text: var(--text-secondary);
+    --d3-grid: var(--chart-grid);
+    --d3-axis: var(--chart-axis);
+}
+
+.chart-container text {
+    fill: var(--d3-text);
+}
+
+.chart-container .axis line,
+.chart-container .axis path {
+    stroke: var(--d3-axis);
+}
+
+.chart-container .grid line {
+    stroke: var(--d3-grid);
+}
+
+/* ==========================================
+   🗺️ LEAFLET MAP THEME INTEGRATION
+   ========================================== */
+.leaflet-container {
+    background: var(--map-water) !important;
+}
+
+.leaflet-popup-content-wrapper {
+    background: var(--bg-glass-heavy) !important;
+    border: 1px solid var(--border-default) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--bg-glass-heavy) !important;
+}
+
+.leaflet-popup-close-button {
+    color: var(--text-muted) !important;
+}
+
+.leaflet-popup-close-button:hover {
+    color: var(--text-primary) !important;
+}
+
+.leaflet-control-zoom a {
+    background: var(--bg-elevated) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-default) !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: var(--bg-interactive-hover) !important;
+}
+
+.leaflet-control-attribution {
+    background: var(--bg-glass) !important;
+    color: var(--text-muted) !important;
+}
+
+/* ==========================================
+   🔘 FOCUS VISIBLE (Accessibility)
+   ========================================== */
+:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+/* ==========================================
+   🌓 REDUCED MOTION
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ==========================================
+   📱 COLOR SCHEME META
+   ========================================== */
+:root {
+    color-scheme: dark light;
+}
+
+:root.dark-mode,
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+:root.light-mode,
+[data-theme="light"] {
+    color-scheme: light;
+}

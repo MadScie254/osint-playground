@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Playground | Intelligence Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="css/theme-system.css">
+    <link rel="stylesheet" href="css/darknet.css">
+    <link rel="stylesheet" href="css/search-results.css">
+    <meta name="theme-color" content="#050508">
+</head>
+<body>
+    <!-- Boot Sequence -->
+    <div id="bootScreen" class="boot-screen">
+        <div class="boot-content">
+            <div class="glitch-logo" data-text="OSINT">OSINT</div>
+            <div class="boot-text">
+                <span class="typing">Initializing intelligence systems...</span>
+            </div>
+            <div class="boot-progress">
+                <div class="boot-bar"></div>
+            </div>
+            <div class="boot-status">
+                <div id="bootLog" class="boot-log"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Interface -->
+    <div id="mainApp" class="app hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-mark">
+                    <i class="fas fa-satellite-dish"></i>
+                </div>
+                <span class="logo-text">OSINT<span class="accent">_</span></span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="search">
+                    <div class="nav-icon-box"><i class="fas fa-crosshairs"></i></div>
+                    <span>Target</span>
+                </a>
+                <a href="#" class="nav-item" data-view="scan">
+                    <div class="nav-icon-box"><i class="fas fa-satellite-dish"></i></div>
+                    <span>Scans</span>
+                </a>
+                <a href="#" class="nav-item" data-view="graph">
+                    <div class="nav-icon-box"><i class="fas fa-diagram-project"></i></div>
+                    <span>Graph</span>
+                </a>
+                <a href="#" class="nav-item" data-view="map">
+                    <div class="nav-icon-box"><i class="fas fa-earth-americas"></i></div>
+                    <span>GeoInt</span>
+                </a>
+                <a href="#" class="nav-item" data-view="timeline">
+                    <div class="nav-icon-box"><i class="fas fa-timeline"></i></div>
+                    <span>Timeline</span>
+                </a>
+                <a href="#" class="nav-item" data-view="feed">
+                    <div class="nav-icon-box"><i class="fas fa-rss"></i></div>
+                    <span>Intel Feed</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="api-status">
+                    <div class="status-dot online"></div>
+                    <span>Systems Online</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="header-bar">
+                <div class="search-global">
+                    <i class="fas fa-terminal"></i>
+                    <input type="text" id="globalSearch" placeholder="target:// enter query...">
+                    <kbd>⌘K</kbd>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon btn-theme" id="toggleTheme" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-icon btn-notif" id="notifications" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge pulse">3</span>
+                    </button>
+                    <button class="btn-icon btn-settings" id="settings" title="Settings">
+                        <i class="fas fa-gear"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- View: Target Search -->
+            <section id="searchView" class="view active">
+                <div class="view-header">
+                    <h1><i class="fas fa-crosshairs"></i> Target Acquisition</h1>
+                    <p class="subtitle">Initialize reconnaissance on target entity</p>
+                </div>
+
+                <div class="target-intake">
+                    <div class="intake-tabs">
+                        <button class="intake-tab active" data-type="person">
+                            <div class="tab-icon cyan"><i class="fas fa-user-secret"></i></div>
+                            <span>Person</span>
+                        </button>
+                        <button class="intake-tab" data-type="organization">
+                            <div class="tab-icon purple"><i class="fas fa-building"></i></div>
+                            <span>Organization</span>
+                        </button>
+                        <button class="intake-tab" data-type="domain">
+                            <div class="tab-icon green"><i class="fas fa-globe"></i></div>
+                            <span>Domain</span>
+                        </button>
+                        <button class="intake-tab" data-type="username">
+                            <div class="tab-icon orange"><i class="fas fa-at"></i></div>
+                            <span>Username</span>
+                        </button>
+                        <button class="intake-tab" data-type="ip">
+                            <div class="tab-icon pink"><i class="fas fa-network-wired"></i></div>
+                            <span>IP/Host</span>
+                        </button>
+                    </div>
+
+                    <!-- Person Search -->
+                    <div class="intake-form active" data-form="person">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label><i class="fas fa-signature"></i> Full Name</label>
+                                <input type="text" id="personName" placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-school"></i> Associated Institution</label>
+                                <input type="text" id="personSchool" placeholder="School, Company, Organization...">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Location Context</label>
+                                <input type="text" id="personLocation" placeholder="City, State, Country">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-at"></i> Known Usernames</label>
+                                <input type="text" id="personUsernames" placeholder="username1, username2...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Organization Search -->
+                    <div class="intake-form" data-form="organization">
+                        <div class="form-grid">
+                            <div class="form-group full">
+                                <label><i class="fas fa-building"></i> Organization Name</label>
+                                <input type="text" id="orgName" placeholder="Organization or School Name">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-globe"></i> Domain</label>
+                                <input type="text" id="orgDomain" placeholder="example.com">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-map-pin"></i> Location</label>
+                                <input type="text" id="orgLocation" placeholder="Address or City">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Domain Search -->
+                    <div class="intake-form" data-form="domain">
+                        <div class="form-group full">
+                            <label><i class="fas fa-globe"></i> Target Domain</label>
+                            <input type="text" id="domainTarget" placeholder="example.com">
+                        </div>
+                    </div>
+
+                    <!-- Username Search -->
+                    <div class="intake-form" data-form="username">
+                        <div class="form-group full">
+                            <label><i class="fas fa-at"></i> Username / Handle</label>
+                            <input type="text" id="usernameTarget" placeholder="johndoe123">
+                        </div>
+                    </div>
+
+                    <!-- IP Search -->
+                    <div class="intake-form" data-form="ip">
+                        <div class="form-group full">
+                            <label><i class="fas fa-network-wired"></i> IP Address or Hostname</label>
+                            <input type="text" id="ipTarget" placeholder="192.168.1.1 or host.example.com">
+                        </div>
+                    </div>
+
+                    <!-- Scan Profile Selection -->
+                    <div class="scan-profiles">
+                        <h3><i class="fas fa-layer-group"></i> Intelligence Modules</h3>
+                        <div class="profile-grid">
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="social" checked>
+                                <div class="profile-content">
+                                    <i class="fas fa-users"></i>
+                                    <span>Social Intel</span>
+                                    <small>Platforms, profiles, connections</small>
+                                </div>
+                            </label>
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="domain" checked>
+                                <div class="profile-content">
+                                    <i class="fas fa-sitemap"></i>
+                                    <span>Domain Recon</span>
+                                    <small>DNS, WHOIS, subdomains</small>
+                                </div>
+                            </label>
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="breach" checked>
+                                <div class="profile-content">
+                                    <i class="fas fa-unlock-alt"></i>
+                                    <span>Breach Data</span>
+                                    <small>Exposed credentials, leaks</small>
+                                </div>
+                            </label>
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="geo">
+                                <div class="profile-content">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <span>GeoInt</span>
+                                    <small>Location, proximity, mapping</small>
+                                </div>
+                            </label>
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="threat">
+                                <div class="profile-content">
+                                    <i class="fas fa-shield-virus"></i>
+                                    <span>Threat Intel</span>
+                                    <small>Malware, C2, reputation</small>
+                                </div>
+                            </label>
+                            <label class="profile-card">
+                                <input type="checkbox" name="modules" value="deep">
+                                <div class="profile-content">
+                                    <i class="fas fa-user-secret"></i>
+                                    <span>Deep Scan</span>
+                                    <small>Full SpiderFoot modules</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="intake-actions">
+                        <button id="initScan" class="btn-primary btn-large">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>Initialize Scan</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Active Scans -->
+            <section id="scanView" class="view">
+                <div class="view-header">
+                    <h1><i class="fas fa-satellite-dish"></i> Active Operations</h1>
+                    <p class="subtitle">Monitor running intelligence collection</p>
+                </div>
+                
+                <!-- Scan Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card cyan">
+                        <div class="stat-icon"><i class="fas fa-play-circle"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="activeScansCount">0</span>
+                            <span class="stat-label">Active Scans</span>
+                        </div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="completedScansCount">0</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon"><i class="fas fa-database"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalResultsCount">0</span>
+                            <span class="stat-label">Results Found</span>
+                        </div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="avgScanTime">0s</span>
+                            <span class="stat-label">Avg Scan Time</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Active Scans List -->
+                <div class="scans-section">
+                    <h3><i class="fas fa-spinner fa-spin"></i> Running Operations</h3>
+                    <div id="activeScansList" class="scans-list">
+                        <div class="empty-state">
+                            <i class="fas fa-satellite-dish"></i>
+                            <p>No active scans. Start a new scan from Target Acquisition.</p>
+                            <button class="btn-outline" onclick="darknetUI.switchView('searchView')">
+                                <i class="fas fa-plus"></i> New Scan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Stream -->
+                <div class="results-stream">
+                    <h3><i class="fas fa-stream"></i> Live Intelligence Stream</h3>
+                    <div id="intelStream" class="intel-stream">
+                        <div class="stream-item">
+                            <span class="time">--:--:--</span>
+                            <span class="type info">[SYSTEM]</span>
+                            <span class="content">Awaiting scan initialization...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Graph Visualization -->
+            <section id="graphView" class="view">
+                <div class="view-header compact">
+                    <h1><i class="fas fa-diagram-project"></i> Entity Relationship Graph</h1>
+                    <div class="graph-controls">
+                        <button class="btn-sm" id="graphZoomIn" title="Zoom In"><i class="fas fa-plus"></i></button>
+                        <button class="btn-sm" id="graphZoomOut" title="Zoom Out"><i class="fas fa-minus"></i></button>
+                        <button class="btn-sm" id="graphReset" title="Reset View"><i class="fas fa-expand"></i></button>
+                        <button class="btn-sm" id="graphCenter" title="Center Graph"><i class="fas fa-crosshairs"></i></button>
+                        <select id="graphLayout" title="Graph Layout">
+                            <option value="force">Force-Directed</option>
+                            <option value="hierarchical">Hierarchical</option>
+                            <option value="circular">Circular</option>
+                            <option value="radial">Radial</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Graph Legend -->
+                <div class="graph-legend">
+                    <div class="legend-title">Entity Types</div>
+                    <div class="legend-items">
+                        <div class="legend-item"><span class="node-dot person"></span> Person</div>
+                        <div class="legend-item"><span class="node-dot org"></span> Organization</div>
+                        <div class="legend-item"><span class="node-dot domain"></span> Domain</div>
+                        <div class="legend-item"><span class="node-dot email"></span> Email</div>
+                        <div class="legend-item"><span class="node-dot social"></span> Social Profile</div>
+                        <div class="legend-item"><span class="node-dot location"></span> Location</div>
+                    </div>
+                </div>
+                
+                <div id="graphContainer" class="graph-container">
+                    <div id="graphCanvas" class="graph-canvas">
+                        <div class="graph-placeholder">
+                            <i class="fas fa-diagram-project"></i>
+                            <h3>Entity Graph Visualization</h3>
+                            <p>Run a scan to populate the relationship graph</p>
+                            <div class="graph-demo-stats">
+                                <span><i class="fas fa-circle"></i> 0 Nodes</span>
+                                <span><i class="fas fa-link"></i> 0 Connections</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="nodeDetails" class="node-details hidden">
+                    <div class="node-details-header">
+                        <h4>Entity Details</h4>
+                        <button class="btn-close-sm" id="closeNodeDetails"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="node-details-body">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: GeoInt Map -->
+            <section id="mapView" class="view">
+                <div class="view-header compact">
+                    <h1><i class="fas fa-earth-americas"></i> Geographic Intelligence</h1>
+                    <div class="map-controls">
+                        <button class="btn-sm active" data-layer="default" title="Default Map"><i class="fas fa-map"></i></button>
+                        <button class="btn-sm" data-layer="satellite" title="Satellite View"><i class="fas fa-satellite"></i></button>
+                        <button class="btn-sm" data-layer="dark" title="Dark Mode"><i class="fas fa-moon"></i></button>
+                        <button class="btn-sm" id="mapFitAll" title="Fit All Markers"><i class="fas fa-expand-arrows-alt"></i></button>
+                    </div>
+                </div>
+                
+                <div class="map-layout">
+                    <div id="mapContainer" class="map-container">
+                        <div id="leafletMap" class="leaflet-map"></div>
+                        <div class="map-overlay-stats">
+                            <div class="map-stat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span id="mapMarkerCount">0</span> Locations
+                            </div>
+                            <div class="map-stat">
+                                <i class="fas fa-globe"></i>
+                                <span id="mapCountryCount">0</span> Countries
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-sidebar">
+                        <div class="map-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="mapSearch" placeholder="Search locations...">
+                        </div>
+                        
+                        <div class="map-legend">
+                            <h4><i class="fas fa-layer-group"></i> Entity Types</h4>
+                            <div class="legend-item"><span class="dot person"></span> Persons</div>
+                            <div class="legend-item"><span class="dot org"></span> Organizations</div>
+                            <div class="legend-item"><span class="dot infra"></span> Infrastructure</div>
+                            <div class="legend-item"><span class="dot event"></span> Events</div>
+                            <div class="legend-item"><span class="dot ip"></span> IP Locations</div>
+                        </div>
+                        
+                        <div class="map-entities">
+                            <h4><i class="fas fa-list"></i> Located Entities</h4>
+                            <div id="mapEntitiesList" class="entities-list">
+                                <div class="empty-state small">
+                                    <p>No locations discovered yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Timeline -->
+            <section id="timelineView" class="view">
+                <div class="view-header">
+                    <h1><i class="fas fa-timeline"></i> Intelligence Timeline</h1>
+                    <p class="subtitle">Temporal analysis of collected data</p>
+                </div>
+                
+                <div class="timeline-toolbar">
+                    <div class="timeline-filters">
+                        <button class="filter-btn active" data-filter="all"><i class="fas fa-globe"></i> All</button>
+                        <button class="filter-btn" data-filter="social"><i class="fas fa-users"></i> Social</button>
+                        <button class="filter-btn" data-filter="breach"><i class="fas fa-unlock"></i> Breaches</button>
+                        <button class="filter-btn" data-filter="domain"><i class="fas fa-sitemap"></i> Domains</button>
+                    </div>
+                    <div class="timeline-range-control">
+                        <label for="timelineRange" class="sr-only">Timeline Range</label>
+                        <span class="range-label" id="timeStart">All Time</span>
+                        <input type="range" id="timelineRange" min="0" max="100" value="100" title="Timeline Range">
+                        <span class="range-label" id="timeEnd">Now</span>
+                    </div>
+                </div>
+                
+                <div id="timelineContainer" class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-empty">
+                        <i class="fas fa-clock"></i>
+                        <h3>No Timeline Events</h3>
+                        <p>Run a scan to populate the timeline with discovered intelligence</p>
+                    </div>
+                    
+                    <!-- Timeline events will be populated here -->
+                </div>
+            </section>
+
+            <!-- View: Intel Feed -->
+            <section id="feedView" class="view">
+                <div class="view-header">
+                    <h1><i class="fas fa-rss"></i> Intelligence Feed</h1>
+                    <p class="subtitle">Dev news, cybersecurity updates, and OSINT techniques</p>
+                </div>
+                
+                <!-- Feed Categories -->
+                <div class="feed-tabs">
+                    <button class="feed-tab active" data-feed="all"><i class="fas fa-globe"></i> All</button>
+                    <button class="feed-tab" data-feed="hackernews"><i class="fab fa-hacker-news"></i> HackerNews</button>
+                    <button class="feed-tab" data-feed="security"><i class="fas fa-shield-halved"></i> Security</button>
+                    <button class="feed-tab" data-feed="osint"><i class="fas fa-user-secret"></i> OSINT</button>
+                </div>
+                
+                <div class="feed-layout">
+                    <div class="feed-main">
+                        <!-- Featured Story -->
+                        <div id="featuredStory" class="featured-story">
+                            <div class="featured-badge"><i class="fas fa-fire"></i> Featured</div>
+                            <h2 id="featuredTitle">Loading latest stories...</h2>
+                            <p id="featuredMeta" class="featured-meta"></p>
+                        </div>
+                        
+                        <!-- Feed Grid -->
+                        <div id="feedContent" class="feed-grid-content">
+                            <div class="feed-loading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading intelligence feed...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feed-sidebar">
+                        <div class="feed-section">
+                            <h4><i class="fas fa-fire"></i> Trending on HN</h4>
+                            <ul class="feed-list" id="trendingTechniques">
+                                <li class="loading-placeholder"></li>
+                                <li class="loading-placeholder"></li>
+                                <li class="loading-placeholder"></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feed-section">
+                            <h4><i class="fas fa-shield-virus"></i> Security Alerts</h4>
+                            <ul class="feed-list" id="recentBreaches">
+                                <li><a href="#"><i class="fas fa-exclamation-triangle"></i> CVE-2025-0001 Critical</a></li>
+                                <li><a href="#"><i class="fas fa-bug"></i> New ransomware variant</a></li>
+                                <li><a href="#"><i class="fas fa-lock"></i> Zero-day in popular CMS</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feed-section">
+                            <h4><i class="fas fa-lightbulb"></i> OSINT Tips</h4>
+                            <ul class="feed-list" id="osintTips">
+                                <li><a href="#"><i class="fas fa-search"></i> Advanced Google Dorking</a></li>
+                                <li><a href="#"><i class="fas fa-image"></i> Reverse Image Search</a></li>
+                                <li><a href="#"><i class="fas fa-map"></i> Geolocation Techniques</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feed-section">
+                            <h4><i class="fas fa-bookmark"></i> Quick Links</h4>
+                            <ul class="feed-list">
+                                <li><a href="https://news.ycombinator.com" target="_blank"><i class="fab fa-hacker-news"></i> Hacker News</a></li>
+                                <li><a href="https://www.reddit.com/r/netsec" target="_blank"><i class="fab fa-reddit"></i> r/netsec</a></li>
+                                <li><a href="https://www.exploit-db.com" target="_blank"><i class="fas fa-bug"></i> Exploit DB</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Results Panel (Slide-out) -->
+        <aside id="resultsPanel" class="results-panel hidden">
+            <div class="panel-header">
+                <h3><i class="fas fa-database"></i> Intelligence Report</h3>
+                <button id="closePanel" class="btn-icon" title="Close Panel"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="panel-tabs">
+                <button class="panel-tab active" data-panel="summary">Summary</button>
+                <button class="panel-tab" data-panel="entities">Entities</button>
+                <button class="panel-tab" data-panel="raw">Raw Data</button>
+            </div>
+            <div id="panelContent" class="panel-content">
+                <!-- Dynamic content -->
+            </div>
+            <div class="panel-actions">
+                <button class="btn-outline"><i class="fas fa-download"></i> Export JSON</button>
+                <button class="btn-outline"><i class="fas fa-file-pdf"></i> Generate Report</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 🔔 Notifications Panel -->
+    <div id="notificationsPanel" class="slide-panel hidden">
+        <div class="panel-header">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+            <button class="btn-close" id="closeNotifications" title="Close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="notifications-list">
+            <div class="notif-item unread">
+                <div class="notif-icon green"><i class="fas fa-check-circle"></i></div>
+                <div class="notif-content">
+                    <h4>Scan Complete</h4>
+                    <p>Username scan for "target_user" finished with 23 results</p>
+                    <span class="notif-time">2 minutes ago</span>
+                </div>
+            </div>
+            <div class="notif-item unread">
+                <div class="notif-icon orange"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="notif-content">
+                    <h4>Breach Detected</h4>
+                    <p>Email found in 3 data breaches</p>
+                    <span class="notif-time">15 minutes ago</span>
+                </div>
+            </div>
+            <div class="notif-item unread">
+                <div class="notif-icon cyan"><i class="fas fa-info-circle"></i></div>
+                <div class="notif-content">
+                    <h4>API Status Update</h4>
+                    <p>Shodan API quota renewed</p>
+                    <span class="notif-time">1 hour ago</span>
+                </div>
+            </div>
+            <div class="notif-item">
+                <div class="notif-icon purple"><i class="fas fa-plug"></i></div>
+                <div class="notif-content">
+                    <h4>New Integration</h4>
+                    <p>Hunter.io module connected</p>
+                    <span class="notif-time">Yesterday</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn-text" id="clearAllNotifs">Clear All</button>
+        </div>
+    </div>
+
+    <!-- ⚙️ Settings Modal -->
+    <div id="settingsModal" class="modal-overlay hidden">
+        <div class="modal settings-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-gear"></i> Settings</h2>
+                <button class="btn-close" id="closeSettings" title="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3><i class="fas fa-palette"></i> Appearance</h3>
+                    <div class="setting-row">
+                        <label>Theme</label>
+                        <select id="themeSelect" title="Select Theme">
+                            <option value="dark">Dark Mode</option>
+                            <option value="light">Light Mode</option>
+                            <option value="cyber">Cyber Neon</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <label>Accent Color</label>
+                        <div class="color-picker">
+                            <button class="color-btn color-cyan active" data-color="cyan" title="Cyan accent"></button>
+                            <button class="color-btn color-purple" data-color="purple" title="Purple accent"></button>
+                            <button class="color-btn color-green" data-color="green" title="Green accent"></button>
+                            <button class="color-btn color-orange" data-color="orange" title="Orange accent"></button>
+                            <button class="color-btn color-pink" data-color="pink" title="Pink accent"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3><i class="fas fa-key"></i> API Keys</h3>
+                    <div class="setting-row">
+                        <label>Shodan API Key</label>
+                        <input type="password" placeholder="••••••••" class="setting-input" />
+                        <span class="status-badge online">Connected</span>
+                    </div>
+                    <div class="setting-row">
+                        <label>Hunter.io Key</label>
+                        <input type="password" placeholder="••••••••" class="setting-input" />
+                        <span class="status-badge online">Connected</span>
+                    </div>
+                    <div class="setting-row">
+                        <label>HIBP API Key</label>
+                        <input type="password" placeholder="Not configured" class="setting-input" />
+                        <span class="status-badge offline">Missing</span>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3><i class="fas fa-cog"></i> Scan Options</h3>
+                    <div class="setting-row toggle-row">
+                        <label>Enable Deep Scan</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="deepScanToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row toggle-row">
+                        <label>Auto-export Results</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoExportToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row toggle-row">
+                        <label>Sound Notifications</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="soundToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" id="resetSettings">Reset to Defaults</button>
+                <button class="btn-primary" id="saveSettings"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔥 Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="js/theme-manager.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/osint-core.js"></script>
+    <script src="js/search-client.js"></script>
+    <script src="js/darknet-ui.js"></script>
+    
+    <!-- Fallback: Force show app after 4 seconds if JS fails -->
+    <script>
+        setTimeout(function() {
+            var boot = document.getElementById('bootScreen');
+            var app = document.getElementById('mainApp');
+            if (boot && boot.style.display !== 'none') {
+                console.log('Fallback: forcing app display');
+                boot.style.display = 'none';
+                if (app) {
+                    app.classList.remove('hidden');
+                    app.style.display = 'grid';
+                }
+            }
+        }, 4000);
+    </script>
+</body>
+</html>

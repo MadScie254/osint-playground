@@ -1,0 +1,479 @@
+{
+  "platforms": [
+    {
+      "name": "GitHub",
+      "category": "development",
+      "url": "https://github.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-github",
+      "color": "#333"
+    },
+    {
+      "name": "Twitter/X",
+      "category": "social",
+      "url": "https://twitter.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-twitter",
+      "color": "#1DA1F2"
+    },
+    {
+      "name": "Instagram",
+      "category": "social",
+      "url": "https://instagram.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-instagram",
+      "color": "#E4405F"
+    },
+    {
+      "name": "LinkedIn",
+      "category": "professional",
+      "url": "https://linkedin.com/in/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-linkedin",
+      "color": "#0A66C2"
+    },
+    {
+      "name": "Reddit",
+      "category": "social",
+      "url": "https://reddit.com/user/{username}",
+      "checkMethod": "json",
+      "validStatus": 200,
+      "icon": "fab fa-reddit",
+      "color": "#FF4500"
+    },
+    {
+      "name": "TikTok",
+      "category": "social",
+      "url": "https://tiktok.com/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-tiktok",
+      "color": "#000"
+    },
+    {
+      "name": "YouTube",
+      "category": "social",
+      "url": "https://youtube.com/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-youtube",
+      "color": "#FF0000"
+    },
+    {
+      "name": "Pinterest",
+      "category": "social",
+      "url": "https://pinterest.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-pinterest",
+      "color": "#BD081C"
+    },
+    {
+      "name": "Tumblr",
+      "category": "social",
+      "url": "https://{username}.tumblr.com",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-tumblr",
+      "color": "#36465D"
+    },
+    {
+      "name": "Medium",
+      "category": "blogging",
+      "url": "https://medium.com/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-medium",
+      "color": "#000"
+    },
+    {
+      "name": "Dev.to",
+      "category": "development",
+      "url": "https://dev.to/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-dev",
+      "color": "#0A0A0A"
+    },
+    {
+      "name": "GitLab",
+      "category": "development",
+      "url": "https://gitlab.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-gitlab",
+      "color": "#FC6D26"
+    },
+    {
+      "name": "Bitbucket",
+      "category": "development",
+      "url": "https://bitbucket.org/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-bitbucket",
+      "color": "#0052CC"
+    },
+    {
+      "name": "Stack Overflow",
+      "category": "development",
+      "url": "https://stackoverflow.com/users/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-stack-overflow",
+      "color": "#F48024"
+    },
+    {
+      "name": "Keybase",
+      "category": "security",
+      "url": "https://keybase.io/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-keybase",
+      "color": "#33A0FF"
+    },
+    {
+      "name": "Mastodon",
+      "category": "social",
+      "url": "https://mastodon.social/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-mastodon",
+      "color": "#6364FF"
+    },
+    {
+      "name": "Twitch",
+      "category": "streaming",
+      "url": "https://twitch.tv/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-twitch",
+      "color": "#9146FF"
+    },
+    {
+      "name": "Spotify",
+      "category": "music",
+      "url": "https://open.spotify.com/user/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-spotify",
+      "color": "#1DB954"
+    },
+    {
+      "name": "SoundCloud",
+      "category": "music",
+      "url": "https://soundcloud.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-soundcloud",
+      "color": "#FF5500"
+    },
+    {
+      "name": "Flickr",
+      "category": "photography",
+      "url": "https://flickr.com/people/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-flickr",
+      "color": "#0063DC"
+    },
+    {
+      "name": "Vimeo",
+      "category": "video",
+      "url": "https://vimeo.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-vimeo",
+      "color": "#1AB7EA"
+    },
+    {
+      "name": "Dribbble",
+      "category": "design",
+      "url": "https://dribbble.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-dribbble",
+      "color": "#EA4C89"
+    },
+    {
+      "name": "Behance",
+      "category": "design",
+      "url": "https://behance.net/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-behance",
+      "color": "#1769FF"
+    },
+    {
+      "name": "HackerNews",
+      "category": "tech",
+      "url": "https://news.ycombinator.com/user?id={username}",
+      "checkMethod": "content",
+      "validContent": "created:",
+      "icon": "fab fa-hacker-news",
+      "color": "#FF6600"
+    },
+    {
+      "name": "ProductHunt",
+      "category": "tech",
+      "url": "https://producthunt.com/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-product-hunt",
+      "color": "#DA552F"
+    },
+    {
+      "name": "Patreon",
+      "category": "funding",
+      "url": "https://patreon.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-patreon",
+      "color": "#FF424D"
+    },
+    {
+      "name": "Telegram",
+      "category": "messaging",
+      "url": "https://t.me/{username}",
+      "checkMethod": "content",
+      "validContent": "tgme_page",
+      "icon": "fab fa-telegram",
+      "color": "#0088CC"
+    },
+    {
+      "name": "Discord",
+      "category": "messaging",
+      "url": "https://discord.com/users/{username}",
+      "checkMethod": "api",
+      "icon": "fab fa-discord",
+      "color": "#5865F2"
+    },
+    {
+      "name": "Steam",
+      "category": "gaming",
+      "url": "https://steamcommunity.com/id/{username}",
+      "checkMethod": "content",
+      "validContent": "profile_page",
+      "icon": "fab fa-steam",
+      "color": "#171A21"
+    },
+    {
+      "name": "Xbox",
+      "category": "gaming",
+      "url": "https://xboxgamertag.com/search/{username}",
+      "checkMethod": "content",
+      "icon": "fab fa-xbox",
+      "color": "#107C10"
+    },
+    {
+      "name": "PlayStation",
+      "category": "gaming",
+      "url": "https://psnprofiles.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-playstation",
+      "color": "#003791"
+    },
+    {
+      "name": "VK",
+      "category": "social",
+      "url": "https://vk.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-vk",
+      "color": "#4680C2"
+    },
+    {
+      "name": "OK.ru",
+      "category": "social",
+      "url": "https://ok.ru/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-odnoklassniki",
+      "color": "#EE8208"
+    },
+    {
+      "name": "Gravatar",
+      "category": "identity",
+      "url": "https://gravatar.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-user-circle",
+      "color": "#1E8CBE"
+    },
+    {
+      "name": "About.me",
+      "category": "identity",
+      "url": "https://about.me/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-address-card",
+      "color": "#00A98F"
+    },
+    {
+      "name": "Linktree",
+      "category": "identity",
+      "url": "https://linktr.ee/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-tree",
+      "color": "#39E09B"
+    },
+    {
+      "name": "CodePen",
+      "category": "development",
+      "url": "https://codepen.io/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-codepen",
+      "color": "#000"
+    },
+    {
+      "name": "Replit",
+      "category": "development",
+      "url": "https://replit.com/@{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-code",
+      "color": "#F26207"
+    },
+    {
+      "name": "NPM",
+      "category": "development",
+      "url": "https://npmjs.com/~{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-npm",
+      "color": "#CB3837"
+    },
+    {
+      "name": "PyPI",
+      "category": "development",
+      "url": "https://pypi.org/user/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-python",
+      "color": "#3775A9"
+    },
+    {
+      "name": "HackerOne",
+      "category": "security",
+      "url": "https://hackerone.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-bug",
+      "color": "#494649"
+    },
+    {
+      "name": "BugCrowd",
+      "category": "security",
+      "url": "https://bugcrowd.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-bug",
+      "color": "#F26822"
+    },
+    {
+      "name": "Tryhackme",
+      "category": "security",
+      "url": "https://tryhackme.com/p/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-shield-alt",
+      "color": "#212C42"
+    },
+    {
+      "name": "HackTheBox",
+      "category": "security",
+      "url": "https://app.hackthebox.com/profile/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-cube",
+      "color": "#9FEF00"
+    },
+    {
+      "name": "Kaggle",
+      "category": "data_science",
+      "url": "https://kaggle.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fab fa-kaggle",
+      "color": "#20BEFF"
+    },
+    {
+      "name": "LeetCode",
+      "category": "development",
+      "url": "https://leetcode.com/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-code",
+      "color": "#FFA116"
+    },
+    {
+      "name": "Codeforces",
+      "category": "development",
+      "url": "https://codeforces.com/profile/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-trophy",
+      "color": "#1F8ACB"
+    },
+    {
+      "name": "HuggingFace",
+      "category": "ai_ml",
+      "url": "https://huggingface.co/{username}",
+      "checkMethod": "status",
+      "validStatus": 200,
+      "icon": "fas fa-robot",
+      "color": "#FFD21E"
+    }
+  ],
+  "searchEngines": {
+    "google": {
+      "name": "Google",
+      "searchUrl": "https://www.google.com/search?q=\"{username}\"",
+      "apiEndpoint": "https://www.googleapis.com/customsearch/v1",
+      "requiresKey": true
+    },
+    "yandex": {
+      "name": "Yandex",
+      "searchUrl": "https://yandex.com/search/?text=\"{username}\"",
+      "apiEndpoint": "https://yandex.com/search/xml",
+      "requiresKey": true
+    },
+    "duckduckgo": {
+      "name": "DuckDuckGo",
+      "searchUrl": "https://duckduckgo.com/?q=\"{username}\"",
+      "apiEndpoint": "https://api.duckduckgo.com/",
+      "requiresKey": false
+    },
+    "bing": {
+      "name": "Bing",
+      "searchUrl": "https://www.bing.com/search?q=\"{username}\"",
+      "apiEndpoint": "https://api.bing.microsoft.com/v7.0/search",
+      "requiresKey": true
+    }
+  },
+  "categories": [
+    "social",
+    "development",
+    "professional",
+    "gaming",
+    "streaming",
+    "music",
+    "video",
+    "photography",
+    "design",
+    "tech",
+    "security",
+    "messaging",
+    "blogging",
+    "identity",
+    "funding",
+    "data_science",
+    "ai_ml"
+  ]
+}
