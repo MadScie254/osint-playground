@@ -1100,10 +1100,10 @@ class DarknetUI {
     }
     
     setupSearchActions() {
-        // Main execute button
-        const executeBtn = document.getElementById('executeBtn');
-        if (executeBtn) {
-            executeBtn.addEventListener('click', () => this.executeScan());
+        // Main execute button - supports both IDs for backwards compatibility
+        const initScanBtn = document.getElementById('initScan') || document.getElementById('executeBtn');
+        if (initScanBtn) {
+            initScanBtn.addEventListener('click', () => this.executeScan());
         }
         
         // Form submissions
@@ -1139,10 +1139,12 @@ class DarknetUI {
         }
         
         // Show loading state
-        const btn = document.getElementById('executeBtn');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Scanning...</span>';
-        btn.disabled = true;
+        const btn = document.getElementById('initScan') || document.getElementById('executeBtn');
+        const originalText = btn?.innerHTML;
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Scanning...</span>';
+            btn.disabled = true;
+        }
         
         // Open results panel
         this.openResultsPanel();
